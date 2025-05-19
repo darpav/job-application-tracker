@@ -22,6 +22,9 @@ public class JobApplication {
 
     @Column(name = "company_name")
     private String companyName;
+    @Column(name = "company_url")
+    private String companyUrl;
+
     @Column(name = "job_title")
     private String jobTitle;
 
@@ -37,9 +40,8 @@ public class JobApplication {
     @Column(name = "skills_needed", columnDefinition = "TEXT")
     private String skillsNeeded;
 
-    // company url
-    @Column(name = "company_url")
-    private String companyUrl;
+
+
 
     // source
     @Column(name = "application_source")

@@ -38,41 +38,98 @@
     <div class="row mt-3">
         <div class="col">
             <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <h3>New Job Application</h3>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form action="#" th:action="${jobApplicationDto.id != null} ? @{/applications/edit/{id}(id=${jobApplicationDto.id})} : @{/applications/new}" th:object="${jobApplicationDto}" method="post">
                         <input type="hidden" th:field="*{id}">
 
+                        <div class="row">
+                            <!-- Company name -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="companyName" class="form-label">Company name</label>
+                                    <input type="text" class="form-control" id="companyName" th:field="*{companyName}">
+                                </div>
+                            </div>
+                            <!-- Company url -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="companyUrl" class="form-label">Company url</label>
+                                    <input type="url" class="form-control" id="companyUrl" th:field="*{companyUrl}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Job title -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobTitle" class="form-label">Job title</label>
+                                    <input type="text" class="form-control" id="jobTitle" th:field="*{jobTitle}">
+                                </div>
+                            </div>
+                            <!-- Job application url -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobApplicationUrl" class="form-label">Job application url</label>
+                                    <input type="url" class="form-control" id="jobApplicationUrl" th:field="*{applicationUrl}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Job application date -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobApplicationDate" class="form-label">Job application date</label>
+                                    <input type="date" class="form-control" id="jobApplicationDate" th:field="*{applicationDate}">
+                                </div>
+                            </div>
+                            <!-- Job application deadline -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobApplicationDeadline" class="form-label">Job application deadline</label>
+                                    <input type="date" class="form-control" id="jobApplicationDeadline" th:field="*{applicationDeadline}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Job application source -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobApplicationSource" class="form-label">Job application source</label>
+                                    <input type="text" class="form-control" id="jobApplicationSource" th:field="*{applicationSource}">
+                                </div>
+                            </div>
+                            <!-- Job application source url -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobApplicationSourceUrl" class="form-label">Job application source url</label>
+                                    <input type="url" class="form-control" id="jobApplicationSourceUrl" th:field="*{applicationSourceUrl}">
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="mb-3">
-                            <label for="companyName" class="form-label">Company name</label>
-                            <input type="text" class="form-control" id="companyName" th:field="*{companyName}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="jobTitle" class="form-label">Job title</label>
-                            <input type="text" class="form-control" id="jobTitle" th:field="*{jobTitle}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="jobApplicationSource" class="form-label">Job application source</label>
-                            <input type="text" class="form-control" id="jobApplicationSource" th:field="*{applicationSource}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="jobApplicationUrl" class="form-label">Job application url</label>
-                            <input type="url" class="form-control" id="jobApplicationUrl" th:field="*{applicationUrl}">
-                        </div>
-                        <!-- Application date -->
-                        <div class="mb-3">
-                            <label for="jobApplicationDate" class="form-label">Job application date</label>
-                            <input type="date" class="form-control" id="jobApplicationDate" th:field="*{applicationDate}">
-                        </div>
-                        <!-- Due Date -->
-                        <div class="mb-3">
-                            <label for="jobApplicationDeadline" class="form-label">Job application deadline</label>
-                            <input type="date" class="form-control" id="jobApplicationDeadline" th:field="*{applicationDeadline}">
-                        </div>
-                        <div class="mb-3">
                             <label for="jobDescription" class="form-label">Job Description</label>
-                            <textarea type="text" class="form-control" id="jobDescription" rows="8" th:field="*{jobDescription}"></textarea>
+                            <textarea type="text" class="form-control" id="jobDescription" rows="5" th:field="*{jobDescription}"></textarea>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="duties" class="form-label">Duties</label>
+                            <textarea type="text" class="form-control" id="duties" rows="5" th:field="*{jobDescription}"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="skills" class="form-label">Skills</label>
+                            <textarea type="text" class="form-control" id="skills" rows="5" th:field="*{jobDescription}"></textarea>
+                        </div>
+
 
                         <a th:href="@{/applications}" class="btn btn-primary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Save</button>
