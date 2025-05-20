@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class JobApplicationController {
@@ -31,10 +32,16 @@ public class JobApplicationController {
     }
 
     @GetMapping("/applications/{id}")
-    public String getJobApplicationDetail(@PathVariable("id") Long id) {
-        jobApplicationService.getJobApplicationById(id);
+    public String getJobApplicationDetail(@PathVariable("id") Long id, Model model) {
+        Optional<JobApplicationDto> jobApplicationDtoOptional = jobApplicationService.getJobApplicationById(id);
 
-        return "application/detail";
+        if(jobApplicationDtoOptional.isPresent()) {
+            JobApplicationDto jobApplicationDto = jobApplicationDtoOptional.get();
+            model.addAttribute("jobApplicationDto", jobApplicationDto);
+            return "application/detail";
+        } else {
+            return "error/not-found";
+        }
     }
 
     @GetMapping("/applications/new")

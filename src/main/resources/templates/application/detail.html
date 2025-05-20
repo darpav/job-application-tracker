@@ -45,68 +45,68 @@
                     <div class="row">
                         <!-- Company Name -->
                         <div class="col">
-                            <p><strong>Company name: </strong> <span>companyName</span></p>
+                            <p><strong>Company name: </strong> <span th:text="${jobApplicationDto.companyName}">companyName</span></p>
                         </div>
                         <!-- Company Url -->
                         <div class="col">
-                            <p><strong>Company url: </strong> <span>companyUrl</span></p>
+                            <p><strong>Company url: </strong> <a th:href="${jobApplicationDto.companyUrl}" th:text="${jobApplicationDto.companyUrl}" target="_blank">companyUrl</a></p>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Job Title -->
                         <div class="col">
-                            <p><strong>Job title: </strong> <span>jobTitle</span></p>
+                            <p><strong>Job title: </strong> <span th:text="${jobApplicationDto.jobTitle}">jobTitle</span></p>
                         </div>
                         <!-- Job Application Url -->
                         <div class="col">
-                            <p><strong>Job application url: </strong> <span>jobApplicationUrl</span></p>
+                            <p><strong>Job application url: </strong> <a th:href="${jobApplicationDto.jobApplicationUrl}" th:text="${jobApplicationDto.jobApplicationUrl}" target="_blank">jobApplicationUrl</a></p>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Job Application Source -->
                         <div class="col">
-                            <p><strong>Job application source: </strong> <span>jobApplicationSource</span></p>
+                            <p><strong>Job application source: </strong> <span th:text="${jobApplicationDto.jobApplicationSource}">jobApplicationSource</span></p>
                         </div>
                         <!-- Job Application Source Url -->
                         <div class="col">
-                            <p><strong>Job application source url: </strong> <span>jobApplicationSourceUrl</span></p>
+                            <p><strong>Job application source url: </strong> <a th:href="${jobApplicationDto.jobApplicationSourceUrl}" th:text="${jobApplicationDto.jobApplicationSourceUrl}" target="_blank">jobApplicationSourceUrl</a></p>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Job Application Date -->
                         <div class="col">
-                            <p><strong>Job application date: </strong> <span>jobApplicationDate</span> <strong></strong></p>
+                            <p><strong>Job application date: </strong> <span th:text="${jobApplicationDto.jobApplicationDate}">jobApplicationDate</span> <strong></strong></p>
                         </div>
                         <!-- Job Application Deadline -->
                         <div class="col">
-                            <p><strong>Job application deadline: </strong> <span>jobApplicationDeadline</span></p>
+                            <p><strong>Job application deadline: </strong> <span th:text="${jobApplicationDto.jobApplicationDeadline}">jobApplicationDeadline</span></p>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Job Description -->
                         <div class="col">
                             <p><strong>Job description: </strong></p>
-                            <p>jobDescription</p>
+                            <p th:text="${jobApplicationDto.jobDescription}">jobDescription</p>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Job Responsibilities -->
                         <p><strong>Job responsibilities: </strong></p>
-                        <p>jobResponsibility</p>
+                        <p th:text="${jobApplicationDto.jobResponsibility}">jobResponsibility</p>
                     </div>
                     <div class="row">
                         <!-- Job Skills -->
                         <p><strong>Job skills: </strong></p>
-                        <p>jobSkills</p>
+                        <p th:text="${jobApplicationDto.jobSkills}">jobSkills</p>
                     </div>
                     <div class="row">
                         <!-- Confirmation Mail Received -->
                         <div class="col">
-                            <p><strong>Confirmation mail received: </strong> <span>confirmationMailReceived</span></p>
+                            <p><strong>Confirmation mail received: </strong> <span th:text="${jobApplicationDto.confirmationMailReceived}">confirmationMailReceived</span></p>
                         </div>
                         <!-- Job Interview Call -->
                         <div class="col">
-                            <p><strong>Job interview call: </strong> <span>jobInterviewCall</span></p>
+                            <p><strong>Job interview call: </strong> <span th:text="${jobApplicationDto.jobInterviewCall}">jobInterviewCall</span></p>
                         </div>
                     </div>
                     <div class="row">

@@ -27,15 +27,8 @@ public class JobApplicationService {
 
     // get Job Application by id
     public Optional<JobApplicationDto> getJobApplicationById(Long id) {
-
-        JobApplicationDto jobApplicationDto = new JobApplicationDto();
         Optional<JobApplication> jobApplicationOptional = jobApplicationRepository.findById(id);
-
-        if(jobApplicationOptional.isPresent()) {
-            jobApplicationDto = convertToDto(jobApplicationOptional.get());
-        }
-
-        return Optional.of(jobApplicationDto);
+        return jobApplicationOptional.map(this::convertToDto);
     }
 
     // save new Job Application
