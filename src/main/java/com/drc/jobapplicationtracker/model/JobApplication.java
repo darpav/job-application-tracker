@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
@@ -27,30 +30,27 @@ public class JobApplication {
 
     @Column(name = "job_title")
     private String jobTitle;
+    @Column(name = "job_application_url")
+    private String jobApplicationUrl;
 
-    @Column(name = "application_date")
-    private LocalDate applicationDate;
-    @Column(name = "application_deadline")
-    private LocalDate applicationDeadline;
+    @Column(name = "job_application_source")
+    private String jobApplicationSource;
+    @Column(name = "job_application_source_url")
+    private String jobApplicationSourceUrl;
 
-
-    @Column(name = "your_responsibility", columnDefinition = "TEXT")
-    private String yourResponsibility;
-    // skills needed
-    @Column(name = "skills_needed", columnDefinition = "TEXT")
-    private String skillsNeeded;
-
-
-
-
-    // source
-    @Column(name = "application_source")
-    private String applicationSource;
-    @Column(name = "application_url")
-    private String applicationUrl;
+    @Column(name = "job_application_date")
+    private LocalDate jobApplicationDate;
+    @Column(name = "job_application_deadline")
+    private LocalDate jobApplicationDeadline;
 
     @Column(name = "job_description", columnDefinition = "TEXT")
     private String jobDescription;
+
+    @Column(name = "job_responsibility", columnDefinition = "TEXT")
+    private String jobResponsibility;
+
+    @Column(name = "job_skills", columnDefinition = "TEXT")
+    private String jobSkills;
 
     @Column(name = "mail_received")
     private String mailReceived;
@@ -58,6 +58,9 @@ public class JobApplication {
     @Column(name = "job_interview_call")
     private String jobInterviewCall;
 
-
+    @CreationTimestamp
+    private Timestamp createdAt;
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 
 }

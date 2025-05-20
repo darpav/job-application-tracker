@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/applications}">Home</a>
+                    <a class="nav-link" aria-current="page" th:href="@{/applications}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/applications/new}">New Job Application</a>
@@ -32,6 +32,84 @@
     </div>
 </nav>
 <!-- Navigation End -->
+
+<!-- Content -->
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Job Application Detail</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Company Name -->
+                        <div class="col">
+                            <p><strong>Company name: </strong> <span>companyName</span></p>
+                        </div>
+                        <!-- Company Url -->
+                        <div class="col">
+                            <p><strong>Company url: </strong> <span>companyUrl</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Job Title -->
+                        <div class="col">
+                            <p><strong>Job title: </strong> <span>jobTitle</span></p>
+                        </div>
+                        <!-- Job Application Url -->
+                        <div class="col">
+                            <p><strong>Job application url: </strong> <span>jobApplicationUrl</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Job Application Source -->
+                        <div class="col">
+                            <p><strong>Job application source: </strong> <span>jobApplicationSource</span></p>
+                        </div>
+                        <!-- Job Application Source Url -->
+                        <div class="col">
+                            <p><strong>Job application source url: </strong> <span>jobApplicationSourceUrl</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Job Application Date -->
+                        <div class="col">
+                            <p><strong>Job application date: </strong> <span>jobApplicationDate</span> <strong></strong></p>
+                        </div>
+                        <!-- Job Application Deadline -->
+                        <div class="col">
+                            <p><strong>Job application deadline: </strong> <span>jobApplicationDeadline</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Job Description -->
+                        <div class="col">
+                            <p><strong>Job description: </strong></p>
+                            <p>jobDescription</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Job Responsibilities -->
+                        <p><strong>Job responsibilities: </strong></p>
+                        <p>jobResponsibility</p>
+                    </div>
+                    <div class="row">
+                        <!-- Job Skills -->
+                        <p><strong>Job skills: </strong></p>
+                        <p>jobSkills</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-primary" th:href="@{/applications}">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content End -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>

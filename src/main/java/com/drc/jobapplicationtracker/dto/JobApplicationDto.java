@@ -17,36 +17,22 @@ public class JobApplicationDto {
     private Long id;
 
     private String companyName;
+    private String companyUrl;
+
     private String jobTitle;
+    private String jobApplicationUrl;
 
-    private LocalDate applicationDate;
-    private LocalDate applicationDeadline;
+    private String jobApplicationSource;
+    private String jobApplicationSourceUrl;
 
-    private String applicationSource;
-    private String applicationUrl;
+    private LocalDate jobApplicationDate;
+    private LocalDate jobApplicationDeadline;
 
     private String jobDescription;
+    private String jobResponsibility;
+    private String jobSkills;
 
     private String mailReceived;
     private String jobInterviewCall;
 
-    private String yourResponsibility;
-    private String skillsNeeded;
-    private String companyUrl;
-
-    @Override
-    public String toString() {
-        return "JobApplicationDto{" +
-                "id=" + id +
-                ", companyName='" + companyName + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", applicationDate=" + applicationDate +
-                ", applicationDeadline=" + applicationDeadline +
-                ", applicationSource='" + applicationSource + '\'' +
-                ", applicationUrl='" + applicationUrl + '\'' +
-                ", jobDescription='" + jobDescription + '\'' +
-                ", mailReceived='" + mailReceived + '\'' +
-                ", jobInterviewCall='" + jobInterviewCall + '\'' +
-                '}';
-    }
 }
