@@ -131,6 +131,23 @@
                             <textarea type="text" class="form-control" id="jobSkills" rows="5" th:field="*{jobSkills}"></textarea>
                         </div>
 
+                        <div class="row">
+                            <!-- Confirmation Mail Received -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="confirmationMailReceived" class="form-label">Confirmation mail received Yes/No</label>
+                                    <input type="text" class="form-control" id="confirmationMailReceived" th:field="*{confirmationMailReceived}">
+                                </div>
+                            </div>
+                            <!-- Job Interview Call -->
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="jobInterviewCall" class="form-label">Job interview call Yes/No</label>
+                                    <input type="text" class="form-control" id="jobInterviewCall" th:field="*{jobInterviewCall}">
+                                </div>
+                            </div>
+                        </div>
+
 
                         <a th:href="@{/applications}" class="btn btn-primary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Save</button>

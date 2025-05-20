@@ -32,7 +32,7 @@ public class JobApplicationDto {
     private String jobResponsibility;
     private String jobSkills;
 
-    private String mailReceived;
+    private String confirmationMailReceived;
     private String jobInterviewCall;
 
 }

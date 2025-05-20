@@ -52,8 +52,8 @@ public class JobApplication {
     @Column(name = "job_skills", columnDefinition = "TEXT")
     private String jobSkills;
 
-    @Column(name = "mail_received")
-    private String mailReceived;
+    @Column(name = "confirmation_mail_received")
+    private String confirmationMailReceived;
 
     @Column(name = "job_interview_call")
     private String jobInterviewCall;
