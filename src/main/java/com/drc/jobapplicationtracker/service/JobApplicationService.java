@@ -6,6 +6,7 @@ import com.drc.jobapplicationtracker.repository.JobApplicationRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,19 @@ public class JobApplicationService {
     }
 
     // get all Job Applications
-    public List<JobApplication> getAllJobApplications() {
-        return jobApplicationRepository.findAll();
+    public List<JobApplicationDto> getAllJobApplications() {
+        // return dto
+        List<JobApplication> jobApplications = jobApplicationRepository.findAll();
+        List<JobApplicationDto> jobApplicationsDto = new ArrayList<>();
+
+        for (JobApplication jobApplication : jobApplications) {
+            JobApplicationDto jobApplicationDto = convertToDto(jobApplication);
+            // handle short description
+            jobApplicationDto.setJobShortDescription(convertToShortDescription(jobApplication.getJobDescription()));
+            jobApplicationsDto.add(jobApplicationDto);
+        }
+
+        return jobApplicationsDto;
     }
 
     // get Job Application by id
@@ -60,5 +72,13 @@ public class JobApplicationService {
 
     private JobApplicationDto convertToDto(JobApplication jobApplication) {
         return modelMapper.map(jobApplication, JobApplicationDto.class);
+    }
+
+    private String convertToShortDescription(String jobDescription) {
+        String description = jobDescription;
+        if(description.length() > 100) {
+            description = description.substring(0, 100) + "...";
+        }
+        return description;
     }
 }

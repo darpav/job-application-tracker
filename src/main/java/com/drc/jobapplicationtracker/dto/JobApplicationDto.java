@@ -32,6 +32,8 @@ public class JobApplicationDto {
     private String jobResponsibility;
     private String jobSkills;
 
+    private String jobShortDescription;
+
     private String confirmationMailReceived;
     private String jobInterviewCall;
 

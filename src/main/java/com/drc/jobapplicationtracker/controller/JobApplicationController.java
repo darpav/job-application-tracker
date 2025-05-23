@@ -25,8 +25,8 @@ public class JobApplicationController {
 
     @GetMapping("/applications")
     public String getAllJobApplications(Model model) {
-        List<JobApplication> jobApplications = jobApplicationService.getAllJobApplications();
-        model.addAttribute("jobApplications", jobApplications);
+        List<JobApplicationDto> jobApplicationsDto = jobApplicationService.getAllJobApplications();
+        model.addAttribute("jobApplicationsDto", jobApplicationsDto);
 
         return "application/list";
     }
