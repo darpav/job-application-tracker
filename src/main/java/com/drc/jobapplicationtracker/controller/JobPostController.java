@@ -30,7 +30,9 @@ public class JobPostController {
     }
 
     @GetMapping("/posts/new")
-    public String showCreateForm() {
+    public String showCreateForm(Model model) {
+        JobPostDto jobPostDto = new JobPostDto();
+        model.addAttribute("jobPostDto", jobPostDto);
         return "post/form";
     }
 

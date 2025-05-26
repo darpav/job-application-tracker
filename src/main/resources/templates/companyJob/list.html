@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .card-subtitle {
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+        .action-icons a {
+            color: #495057;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .action-icons a:hover {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Fragment -->
+<div th:fragment="navigation">
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+</div>
+
+<!-- Content -->
+<div class="container mt-3">
+    <div class="row mt-3">
+        <div class="col">
+            <a th:href="@{/companyJobs/new}" type="button" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>New Company Career Site</a>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="row">
+        <div class="col-md-3 mt-3" th:each="companyJobDto : ${companyJobsDto}">
+            <div class="card h-100 p-3">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title" th:text="${companyJobDto.companyName}">Company name</h5>
+                    <h6 class="card-subtitle mb-2" th:text="${companyJobDto.companyUrl}"><a th:href="${companyJobDto.companyUrl}">Company url</a></h6>
+                    <h6><a th:href="${companyJobDto.carersUrl}" th:text="${companyJobDto.carersUrl}">Company careers url</a></h6>
+                    <div class="action-icons mt-2">
+                        <a th:href="@{/companyJobs/edit/{id}(id=${companyJobDto.id})}" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a th:href="@{/companyJobs/delete/{id}(id=${companyJobDto.id})}" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+</body>
+</html>

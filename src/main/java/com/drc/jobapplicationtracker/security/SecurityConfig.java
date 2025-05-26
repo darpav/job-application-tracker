@@ -30,6 +30,12 @@ public class SecurityConfig {
                         .requestMatchers("/applications/**").hasRole("USER")
                         .requestMatchers("/posts").hasRole("USER")
                         .requestMatchers("/posts/**").hasRole("USER")
+                        .requestMatchers("/companyJobs").hasRole("USER")
+                        .requestMatchers("/companyJobs/**").hasRole("USER")
+                        .requestMatchers("/static").permitAll()
+                        .requestMatchers("/static/**").permitAll()
+                        .requestMatchers("/static/css/**", "/static/js/**", "/static/images/**", "/static/favicon.ico").permitAll()
+                        .requestMatchers("/css/**", "/css/styles.css",  "/js/**", "/images/**", "/favicon.ico").permitAll()
                         .requestMatchers("/login").permitAll())
                 .formLogin((form) -> form
                         .loginPage("/login")

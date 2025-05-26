@@ -27,7 +27,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="#" method="post">
+                        <form action="#" th:action="${jobPostDto.id != null} ? @{/posts/edit/{id}(id=${jobPostDto.id})} : @{/posts/new}" th:object="${jobPostDto}" method="post">
+                            <input type="hidden" th:field="*{id}">
                             <!-- Job Title -->
                             <div class="row">
                                 <div class="col">
@@ -51,7 +52,7 @@
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="jobApplicationPostUrl" class="form-label">Job application post url</label>
-                                        <input type="url" class="form-control" id="jobApplicationPostUrl" th:field="*{jobApplicationPostUrl}">
+                                        <input type="url" class="form-control" id="jobApplicationPostUrl" th:field="*{jobApplicationUrl}">
                                     </div>
                                 </div>
                             </div>

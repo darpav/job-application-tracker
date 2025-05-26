@@ -6,25 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "job_posts")
-public class JobPost {
+@Table(name = "companies_job")
+public class CompanyJob {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String jobTitle;
     private String companyName;
-    private String jobApplicationUrl;
-    private LocalDate jobApplicationDeadline;
-
-    // add checkbox interesting
-
+    private String companyUrl;
+    private String companyCarersUrl;
 }
