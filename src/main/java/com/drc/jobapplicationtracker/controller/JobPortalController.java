@@ -20,45 +20,53 @@ public class JobPortalController {
         this.jobPortalService = jobPortalService;
     }
 
-    @GetMapping("/jobPortals")
+    @GetMapping("/job-portals")
     public String getAllJobPortals(Model model) {
         List<JobPortalDto> jobPortalsDto = jobPortalService.getAllJobPortals();
         model.addAttribute("jobPortalsDto", jobPortalsDto);
-        return "jobPortal/list";
+        return "job-portal/list";
     }
 
-    @GetMapping("/jobPortals/new")
+    @GetMapping("/job-portals/new")
     public String showCreateForm(Model model) {
         JobPortalDto jobPortalDto = new JobPortalDto();
         model.addAttribute("jobPortalDto", jobPortalDto);
-        return "jobPortal/form";
+        return "job-portal/form";
     }
 
-    @PostMapping("/jobPortals/new")
-    public String createJobPortal(@ModelAttribute("jobPortalDto") JobPortalDto jobPortalDto) {
-        jobPortalService.createJobPortal(jobPortalDto);
-        return "redirect:/jobPortals";
+    @PostMapping("/job-portals/new")
+    public String createJobPortal(@ModelAttribute("jobPortalDto") JobPortalDto jobPortalDto,
+                                  Model model) {
+        try {
+            jobPortalService.createJobPortal(jobPortalDto);
+            return "redirect:/job-portals";
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("jobPortalDto", jobPortalDto);
+            return "job-portal/form";
+        }
+
     }
 
-    @GetMapping("/jobPortals/edit/{id}")
+    @GetMapping("/job-portals/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         JobPortalDto jobPortalDto = jobPortalService.getJobPortalById(id).get();
         model.addAttribute("jobPortalDto", jobPortalDto);
-        return "jobPortal/form";
+        return "job-portal/form";
     }
 
-    @PostMapping("/jobPortals/edit/{id}")
+    @PostMapping("/job-portals/edit/{id}")
     public String updateJobPortal(@ModelAttribute("jobPortalDto") JobPortalDto jobPortalDto) {
         jobPortalService.updateJobPortal(jobPortalDto.getId(), jobPortalDto);
-        return "redirect:/jobPortals";
+        return "redirect:/job-portals";
     }
 
-    @GetMapping("/jobPortals/delete/{id}")
+    @GetMapping("/job-portals/delete/{id}")
     public String deleteJobPortal(@PathVariable("id") Long id) {
         jobPortalService.deleteJobPortal(id);
-        return "redirect:/jobPortals";
+        return "redirect:/job-portals";
     }
 
-
+    
 
 }

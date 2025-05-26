@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "job_portals")
-public class JobPortal {
+@Table(name = "companies_careers")
+public class CompanyCareer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,8 @@ public class JobPortal {
 
     private String name;
     private String url;
+    @Column(name = "careers_url")
+    private String careerUrl;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

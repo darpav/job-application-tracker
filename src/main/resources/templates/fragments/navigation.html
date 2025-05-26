@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,14 +42,18 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/applications}">Job Application</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/companyJobs}">Companies & Careers</a>
+                        <a class="nav-link" th:href="@{/applications}">My Job Application</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/posts}">Jobs to Apply</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/company-careers}">My Companies & Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/job-portals}">My Job Portals</a>
+                    </li>
+
                 </ul>
                 <form class="d-flex me-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
@@ -59,8 +64,7 @@
                         <i class="bi bi-person-circle me-2"></i>Account
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#" sec:authentication="name">username</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form th:action="@{/logout}" method="post">

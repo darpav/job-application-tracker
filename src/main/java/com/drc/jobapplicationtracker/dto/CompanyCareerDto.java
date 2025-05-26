@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyJobDto {
+public class CompanyCareerDto {
 
     private Long id;
 
-    private String companyName;
-    private String companyUrl;
-    private String companyCarersUrl;
+    private String name;
+    private String url;
+    private String careerUrl;
 
 }

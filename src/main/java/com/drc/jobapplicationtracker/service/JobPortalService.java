@@ -22,6 +22,10 @@ public class JobPortalService {
     }
 
     public JobPortal createJobPortal(JobPortalDto jobPortalDto) {
+        if(jobPortalRepository.existsByUrl(jobPortalDto.getUrl())) {
+            throw new RuntimeException("Job portal already exists with this url");
+        }
+
         JobPortal jobPortal = convertToEntity(jobPortalDto);
         return jobPortalRepository.save(jobPortal);
     }
