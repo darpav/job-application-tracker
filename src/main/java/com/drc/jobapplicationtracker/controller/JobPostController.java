@@ -20,45 +20,52 @@ public class JobPostController {
         this.jobPostService = jobPostService;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/job-posts")
     public String getAllJobPosts(Model model) {
         // get all job posts
         List<JobPostDto> jobPostsDto = jobPostService.getAllJobPosts();
         model.addAttribute("jobPostsDto", jobPostsDto);
 
-        return "post/list";
+        return "job-post/list";
     }
 
-    @GetMapping("/posts/new")
+    @GetMapping("/job-posts/new")
     public String showCreateForm(Model model) {
         JobPostDto jobPostDto = new JobPostDto();
         model.addAttribute("jobPostDto", jobPostDto);
-        return "post/form";
+        return "job-post/form";
     }
 
-    @PostMapping("/posts/new")
-    public String createJobPost(@ModelAttribute("jobPostDto") JobPostDto jobPostDto) {
-        jobPostService.createJobPost(jobPostDto);
-        return "redirect:/posts";
+    @PostMapping("/job-posts/new")
+    public String createJobPost(@ModelAttribute("jobPostDto") JobPostDto jobPostDto,
+                                Model model) {
+        try {
+            jobPostService.createJobPost(jobPostDto);
+            return "redirect:/job-posts";
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("jobPostDto", jobPostDto);
+            return "job-post/form";
+        }
     }
 
-    @GetMapping("/posts/edit/{id}")
+    @GetMapping("/job-posts/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         JobPostDto jobPostDto = jobPostService.getJobPostById(id).get();
         model.addAttribute("jobPostDto", jobPostDto);
-        return "post/form";
+        return "job-post/form";
     }
 
-    @PostMapping("/posts/edit/{id}")
+    @PostMapping("/job-posts/edit/{id}")
     public String updateJobPost(@ModelAttribute("jobPostDto") JobPostDto jobPostDto) {
         jobPostService.updateJobPost(jobPostDto.getId(), jobPostDto);
-        return "redirect:/posts";
+        return "redirect:/job-posts";
     }
 
-    @GetMapping("/posts/delete/{id}")
+    @GetMapping("/job-posts/delete/{id}")
     public String deleteJobPost(@PathVariable("id") Long id) {
         jobPostService.deleteJobPost(id);
-        return "redirect:/posts";
+        return "redirect:/job-posts";
     }
 
 

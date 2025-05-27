@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="#" th:action="${jobPostDto.id != null} ? @{/posts/edit/{id}(id=${jobPostDto.id})} : @{/posts/new}" th:object="${jobPostDto}" method="post">
+                        <form action="#" th:action="${jobPostDto.id != null} ? @{/job-posts/edit/{id}(id=${jobPostDto.id})} : @{/job-posts/new}" th:object="${jobPostDto}" method="post">
                             <input type="hidden" th:field="*{id}">
                             <!-- Job Title -->
                             <div class="row">
@@ -65,9 +65,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Alert -->
+                            <div class="row">
+                                <div class="col">
+                                    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                                        <span th:text="${errorMessage}">Error Message</span><br>
+                                    </div>
+
+                                </div>
+                            </div>
 
                             <!-- Buttons -->
-                            <a th:href="@{/posts}" class="btn btn-primary">Cancel</a>
+                            <a th:href="@{/job-posts}" class="btn btn-primary">Cancel</a>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
                     </div>

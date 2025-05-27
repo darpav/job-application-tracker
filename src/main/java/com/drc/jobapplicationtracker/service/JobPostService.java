@@ -1,9 +1,14 @@
 package com.drc.jobapplicationtracker.service;
 
 import com.drc.jobapplicationtracker.dto.JobPostDto;
+import com.drc.jobapplicationtracker.model.AppUser;
 import com.drc.jobapplicationtracker.model.JobPost;
+import com.drc.jobapplicationtracker.repository.AppUserRepository;
 import com.drc.jobapplicationtracker.repository.JobPostRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,10 +19,14 @@ import java.util.Optional;
 public class JobPostService {
 
     private final JobPostRepository jobPostRepository;
+    private final AppUserRepository appUserRepository;
     private final ModelMapper modelMapper;
 
-    public JobPostService(JobPostRepository jobPostRepository, ModelMapper modelMapper) {
+    public JobPostService(JobPostRepository jobPostRepository,
+                          AppUserRepository appUserRepository,
+                          ModelMapper modelMapper) {
         this.jobPostRepository = jobPostRepository;
+        this.appUserRepository = appUserRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -39,12 +48,18 @@ public class JobPostService {
     }
 
     public JobPost createJobPost(JobPostDto jobPostDto) {
+
+        if(jobPostRepository.existsByJobApplicationUrl(jobPostDto.getJobApplicationUrl())) {
+            throw new RuntimeException("Job post already exists with this url");
+        }
+
+        AppUser appUser = getAuthenticatedAppUser();
+
         JobPost jobPost = convertToEntity(jobPostDto);
+        jobPost.setAppUser(appUser);
         return jobPostRepository.save(jobPost);
     }
 
-
-    // update
     public JobPost updateJobPost(Long id, JobPostDto jobPostDto) {
         // if exists by id update
         // else throw exception
@@ -66,5 +81,13 @@ public class JobPostService {
 
     private JobPost convertToEntity(JobPostDto jobPostDto) {
         return modelMapper.map(jobPostDto, JobPost.class);
+    }
+
+    private AppUser getAuthenticatedAppUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        AppUser appUser = appUserRepository.findByUsername(user.getUsername()).get();
+
+        return appUser;
     }
 }

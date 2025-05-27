@@ -27,6 +27,10 @@ public class CompanyCareer {
     @Column(name = "careers_url")
     private String careerUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private AppUser appUser;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
