@@ -23,60 +23,60 @@ public class JobApplicationController {
     }
 
 
-    @GetMapping("/applications")
+    @GetMapping("/job-applications")
     public String getAllJobApplications(Model model) {
         List<JobApplicationDto> jobApplicationsDto = jobApplicationService.getAllJobApplications();
         model.addAttribute("jobApplicationsDto", jobApplicationsDto);
 
-        return "application/list";
+        return "job-application/list";
     }
 
-    @GetMapping("/applications/{id}")
+    @GetMapping("/job-applications/{id}")
     public String getJobApplicationDetail(@PathVariable("id") Long id, Model model) {
         Optional<JobApplicationDto> jobApplicationDtoOptional = jobApplicationService.getJobApplicationById(id);
 
         if(jobApplicationDtoOptional.isPresent()) {
             JobApplicationDto jobApplicationDto = jobApplicationDtoOptional.get();
             model.addAttribute("jobApplicationDto", jobApplicationDto);
-            return "application/detail";
+            return "job-application/detail";
         } else {
             return "error/not-found";
         }
     }
 
-    @GetMapping("/applications/new")
+    @GetMapping("/job-applications/new")
     public String showCreateForm(Model model) {
         JobApplicationDto jobApplicationDto = new JobApplicationDto();
         model.addAttribute("jobApplicationDto", jobApplicationDto);
 
-        return "application/form";
+        return "job-application/form";
     }
 
-    @PostMapping("/applications/new")
+    @PostMapping("/job-applications/new")
     public String createJobApplication(@ModelAttribute("jobApplicationDto") JobApplicationDto jobApplicationDto) {
         jobApplicationService.createJobApplication(jobApplicationDto);
 
-        return "redirect:/applications";
+        return "redirect:/job-applications";
     }
 
-    @GetMapping("/applications/edit/{id}")
+    @GetMapping("/job-applications/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         JobApplicationDto jobApplicationDto = jobApplicationService.getJobApplicationById(id).get();
         model.addAttribute("jobApplicationDto", jobApplicationDto);
 
-        return "application/form";
+        return "job-application/form";
     }
 
-    @PostMapping("/applications/edit/{id}")
+    @PostMapping("/job-applications/edit/{id}")
     public String updateJobApplication(@ModelAttribute("jobApplicationDto") JobApplicationDto jobApplicationDto) {
         jobApplicationService.updateJobApplication(jobApplicationDto.getId(), jobApplicationDto);
-        return "redirect:/applications";
+        return "redirect:/job-applications";
     }
 
-    @GetMapping("/applications/delete/{id}")
+    @GetMapping("/job-applications/delete/{id}")
     public String deleteJobApplication(@PathVariable("id") Long id) {
         jobApplicationService.deleteJobApplication(id);
-        return "redirect:/applications";
+        return "redirect:/job-applications";
     }
 
     // export to pdf

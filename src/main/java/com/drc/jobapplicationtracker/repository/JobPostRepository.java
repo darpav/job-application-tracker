@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface JobPostRepository extends JpaRepository<JobPost, Long> {
 
     boolean existsByJobApplicationUrl(String url);
+
+    // find all order by date deadline asc
 }

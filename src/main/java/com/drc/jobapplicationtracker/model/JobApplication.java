@@ -58,6 +58,8 @@ public class JobApplication {
     @Column(name = "job_interview_call")
     private String jobInterviewCall;
 
+    // app user id
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
