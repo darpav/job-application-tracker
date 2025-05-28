@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Getter
@@ -25,8 +26,8 @@ public class JobApplicationDto {
     private String jobApplicationSource;
     private String jobApplicationSourceUrl;
 
-    private LocalDate jobApplicationDate;
-    private LocalDate jobApplicationDeadline;
+    private Date jobApplicationDate;
+    private Date jobApplicationDeadline;
 
     private String jobDescription;
     private String jobResponsibility;

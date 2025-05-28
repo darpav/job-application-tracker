@@ -16,8 +16,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/applications").hasRole("USER")
-                        .requestMatchers("/applications/**").hasRole("USER")
+                        .requestMatchers("/job-applications").hasRole("USER")
+                        .requestMatchers("/job-applications/**").hasRole("USER")
                         .requestMatchers("/job-posts").hasRole("USER")
                         .requestMatchers("/job-posts/**").hasRole("USER")
                         .requestMatchers("/company-careers").hasRole("USER")
@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll())
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/applications", true))
+                        .defaultSuccessUrl("/job-applications", true))
                 .logout((logout) -> logout.permitAll());
         return http.build();
     }
