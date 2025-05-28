@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -26,8 +27,10 @@ public class JobApplicationDto {
     private String jobApplicationSource;
     private String jobApplicationSourceUrl;
 
-    private Date jobApplicationDate;
-    private Date jobApplicationDeadline;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate jobApplicationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate jobApplicationDeadline;
 
     private String jobDescription;
     private String jobResponsibility;
