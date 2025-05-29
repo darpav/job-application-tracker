@@ -1,9 +1,14 @@
 package com.drc.jobapplicationtracker.service;
 
 import com.drc.jobapplicationtracker.dto.JobApplicationDto;
+import com.drc.jobapplicationtracker.model.AppUser;
 import com.drc.jobapplicationtracker.model.JobApplication;
+import com.drc.jobapplicationtracker.repository.AppUserRepository;
 import com.drc.jobapplicationtracker.repository.JobApplicationRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,10 +19,14 @@ import java.util.Optional;
 public class JobApplicationService {
 
     private final JobApplicationRepository jobApplicationRepository;
+    private final AppUserRepository appUserRepository;
     private final ModelMapper modelMapper;
 
-    public JobApplicationService(JobApplicationRepository jobApplicationRepository, ModelMapper modelMapper) {
+    public JobApplicationService(JobApplicationRepository jobApplicationRepository,
+                                 AppUserRepository appUserRepository,
+                                 ModelMapper modelMapper) {
         this.jobApplicationRepository = jobApplicationRepository;
+        this.appUserRepository = appUserRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -37,7 +46,6 @@ public class JobApplicationService {
         return jobApplicationsDto;
     }
 
-    // get Job Application by id
     public Optional<JobApplicationDto> getJobApplicationById(Long id) {
         Optional<JobApplication> jobApplicationOptional = jobApplicationRepository.findById(id);
         return jobApplicationOptional.map(this::convertToDto);
@@ -45,7 +53,12 @@ public class JobApplicationService {
 
     // save new Job Application
     public JobApplication createJobApplication(JobApplicationDto jobApplicationDto) {
+
+        AppUser appUser = getAuthenticatedAppUser();
+
         JobApplication jobApplication = convertToEntity(jobApplicationDto);
+        jobApplication.setAppUser(appUser);
+
         return jobApplicationRepository.save(jobApplication);
     }
 
@@ -80,5 +93,13 @@ public class JobApplicationService {
             description = description.substring(0, 100) + "...";
         }
         return description;
+    }
+
+    private AppUser getAuthenticatedAppUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        AppUser appUser = appUserRepository.findByUsername(user.getUsername()).get();
+
+        return appUser;
     }
 }

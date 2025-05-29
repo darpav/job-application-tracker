@@ -1,13 +1,13 @@
 package com.drc.jobapplicationtracker.dto;
 
-import jakarta.persistence.Column;
+import com.drc.jobapplicationtracker.model.JobApplicationStage;
+import com.drc.jobapplicationtracker.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Getter
@@ -18,14 +18,11 @@ public class JobApplicationDto {
 
     private Long id;
 
-    private String companyName;
-    private String companyUrl;
-
     private String jobTitle;
     private String jobApplicationUrl;
 
-    private String jobApplicationSource;
-    private String jobApplicationSourceUrl;
+    private String companyName;
+    private String companyUrl;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate jobApplicationDate;
@@ -33,12 +30,13 @@ public class JobApplicationDto {
     private LocalDate jobApplicationDeadline;
 
     private String jobDescription;
-    private String jobResponsibility;
     private String jobSkills;
 
     private String jobShortDescription;
 
+    private Status status;
+
     private String confirmationMailReceived;
-    private String jobInterviewCall;
+    private JobApplicationStage jobApplicationStage;
 
 }

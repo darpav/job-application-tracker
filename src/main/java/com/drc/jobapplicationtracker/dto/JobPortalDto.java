@@ -15,4 +15,5 @@ public class JobPortalDto {
 
     private String name;
     private String url;
+    private String careerUrl;
 }

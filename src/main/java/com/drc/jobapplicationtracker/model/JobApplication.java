@@ -23,20 +23,17 @@ public class JobApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "job_title")
+    private String jobTitle;
+
+    // job application url -- mandatory for duplicate records
+    @Column(name = "job_application_url")
+    private String jobApplicationUrl;
+
     @Column(name = "company_name")
     private String companyName;
     @Column(name = "company_url")
     private String companyUrl;
-
-    @Column(name = "job_title")
-    private String jobTitle;
-    @Column(name = "job_application_url")
-    private String jobApplicationUrl;
-
-    @Column(name = "job_application_source")
-    private String jobApplicationSource;
-    @Column(name = "job_application_source_url")
-    private String jobApplicationSourceUrl;
 
     @Column(name = "job_application_date")
     private LocalDate jobApplicationDate;
@@ -46,19 +43,22 @@ public class JobApplication {
     @Column(name = "job_description", columnDefinition = "TEXT")
     private String jobDescription;
 
-    @Column(name = "job_responsibility", columnDefinition = "TEXT")
-    private String jobResponsibility;
-
     @Column(name = "job_skills", columnDefinition = "TEXT")
     private String jobSkills;
 
     @Column(name = "confirmation_mail_received")
     private String confirmationMailReceived;
 
-    @Column(name = "job_interview_call")
-    private String jobInterviewCall;
+    @ManyToOne
+    @JoinColumn(name = "app_user_id")
+    private AppUser appUser;
 
-    // app user id
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private JobApplicationStage jobApplicationStage;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

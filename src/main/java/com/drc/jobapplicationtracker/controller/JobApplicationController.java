@@ -2,6 +2,8 @@ package com.drc.jobapplicationtracker.controller;
 
 import com.drc.jobapplicationtracker.dto.JobApplicationDto;
 import com.drc.jobapplicationtracker.model.JobApplication;
+import com.drc.jobapplicationtracker.model.JobApplicationStage;
+import com.drc.jobapplicationtracker.model.Status;
 import com.drc.jobapplicationtracker.service.JobApplicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,8 @@ public class JobApplicationController {
     public String showCreateForm(Model model) {
         JobApplicationDto jobApplicationDto = new JobApplicationDto();
         model.addAttribute("jobApplicationDto", jobApplicationDto);
+        model.addAttribute("statusOptions", Status.values());
+        model.addAttribute("stageOptions", JobApplicationStage.values());
 
         return "job-application/form";
     }
@@ -63,6 +67,8 @@ public class JobApplicationController {
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         JobApplicationDto jobApplicationDto = jobApplicationService.getJobApplicationById(id).get();
         model.addAttribute("jobApplicationDto", jobApplicationDto);
+        model.addAttribute("statusOptions", Status.values());
+        model.addAttribute("stageOptions", JobApplicationStage.values());
 
         return "job-application/form";
     }

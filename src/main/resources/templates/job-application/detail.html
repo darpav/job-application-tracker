@@ -66,29 +66,10 @@
                         </div>
                     </div>
 
-                    <!-- Source Info -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <div class="section-title">Source</div>
-                            <p><span class="data-label">Via:</span> <span th:text="${jobApplicationDto.jobApplicationSource}">Source</span></p>
-                            <p><span class="data-label">URL:</span> <a th:href="${jobApplicationDto.jobApplicationSourceUrl}" th:text="${jobApplicationDto.jobApplicationSourceUrl}" target="_blank">Source URL</a></p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="section-title">Dates</div>
-                            <p><span class="data-label">Applied:</span> <span th:text="${jobApplicationDto.jobApplicationDate}">Application Date</span></p>
-                            <p><span class="data-label">Deadline:</span> <span th:text="${jobApplicationDto.jobApplicationDeadline}">Deadline</span></p>
-                        </div>
-                    </div>
-
                     <!-- Descriptions -->
                     <div class="mb-3">
                         <div class="section-title">Job Description</div>
                         <p th:text="${jobApplicationDto.jobDescription}">Detailed job description...</p>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="section-title">Responsibilities</div>
-                        <p th:text="${jobApplicationDto.jobResponsibility}">List of responsibilities...</p>
                     </div>
 
                     <div class="mb-3">
@@ -99,14 +80,13 @@
                     <!-- Status -->
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <div class="section-title">Status</div>
+                            <div class="section-title">Info</div>
                             <p><span class="data-label">Confirmation Mail Received:</span>
                                 <span th:text="${jobApplicationDto.confirmationMailReceived}">Yes/No</span></p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="section-title">Interview</div>
-                            <p><span class="data-label">Interview Call:</span>
-                                <span th:text="${jobApplicationDto.jobInterviewCall}">Yes/No</span></p>
+                            <p><span class="data-label">Status</span>
+                                <span th:text="${jobApplicationDto.status}">ACTIVE</span></p>
+                            <p><span class="data-label">Status</span>
+                                <span th:text="${jobApplicationDto.jobApplicationStage}">NONE</span></p>
                         </div>
                     </div>
 

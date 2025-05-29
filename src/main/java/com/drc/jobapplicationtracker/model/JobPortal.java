@@ -24,6 +24,8 @@ public class JobPortal {
 
     private String name;
     private String url;
+    @Column(name = "careers_url")
+    private String careerUrl;
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
@@ -36,7 +38,5 @@ public class JobPortal {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-
 
 }
