@@ -30,10 +30,27 @@ public class JobApplicationService {
         this.modelMapper = modelMapper;
     }
 
-    // get all Job Applications
+    // get all job applications
     public List<JobApplicationDto> getAllJobApplications() {
         // return dto
         List<JobApplication> jobApplications = jobApplicationRepository.findAll();
+        List<JobApplicationDto> jobApplicationsDto = new ArrayList<>();
+
+        for (JobApplication jobApplication : jobApplications) {
+            JobApplicationDto jobApplicationDto = convertToDto(jobApplication);
+            // handle short description
+            jobApplicationDto.setJobShortDescription(convertToShortDescription(jobApplication.getJobDescription()));
+            jobApplicationsDto.add(jobApplicationDto);
+        }
+
+        return jobApplicationsDto;
+    }
+
+    // get job application by appUser order by deadline asc
+    public List<JobApplicationDto> getAllJobApplicationsByAppUserIdOrderByJobApplicationDeadlineAsc() {
+        AppUser appUser = getAuthenticatedAppUser();
+
+        List<JobApplication> jobApplications = jobApplicationRepository.findAllByAppUserIdOrderByJobApplicationDeadlineAsc(appUser.getId());
         List<JobApplicationDto> jobApplicationsDto = new ArrayList<>();
 
         for (JobApplication jobApplication : jobApplications) {
