@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,6 @@ public class JobPortalService {
 
     public List<JobPortalDto> getAllJobPortals() {
         AppUser appUser = getAuthenticatedAppUser();
-
         List<JobPortal> jobPortals = jobPortalRepository.findByAppUserId(appUser.getId());
         List<JobPortalDto> jobPortalsDto = new ArrayList<>();
 
@@ -45,15 +43,17 @@ public class JobPortalService {
     }
 
     public Optional<JobPortalDto> getJobPortalById(Long id) {
-        Optional<JobPortal> jobPortalOptional = jobPortalRepository.findById(id);
+        AppUser appUser = getAuthenticatedAppUser();
+        Optional<JobPortal> jobPortalOptional = jobPortalRepository.findByIdAndAppUserId(id, appUser.getId());
         return jobPortalOptional.map(this::convertToDto);
     }
 
     public JobPortal createJobPortal(JobPortalDto jobPortalDto) {
-        if(jobPortalRepository.existsByUrl(jobPortalDto.getUrl())) {
+        AppUser appUser = getAuthenticatedAppUser();
+
+        if(jobPortalRepository.existsByUrlAndAppUserId(jobPortalDto.getUrl(), appUser.getId())) {
             throw new RuntimeException("Job portal already exists with this url");
         }
-        AppUser appUser = getAuthenticatedAppUser();
 
         JobPortal jobPortal = convertToEntity(jobPortalDto);
         jobPortal.setAppUser(appUser);
@@ -61,17 +61,26 @@ public class JobPortalService {
     }
 
     public JobPortal updateJobPortal(Long id, JobPortalDto jobPortalDto) {
-        // if exists by id update
-        // else throw exception
+        AppUser appUser = getAuthenticatedAppUser();
+
+        if(!jobPortalRepository.existsByIdAndAppUserId(id, appUser.getId())) {
+            throw new RuntimeException("Job portal does not exist with this id");
+        }
+
         JobPortal jobPortal = convertToEntity(jobPortalDto);
         jobPortal.setId(id);
+        jobPortal.setAppUser(appUser);
         return jobPortalRepository.save(jobPortal);
     }
 
     public void deleteJobPortal(Long id) {
-        // check if exists by id
-        // else throw exception
-        jobPortalRepository.deleteById(id);
+        AppUser appUser = getAuthenticatedAppUser();
+
+        if(!jobPortalRepository.existsByIdAndAppUserId(id, appUser.getId())) {
+            throw new RuntimeException("Job portal does not exist with this id");
+        }
+
+        jobPortalRepository.deleteByIdAndAppUserId(id, appUser.getId());
     }
 
     private JobPortal convertToEntity(JobPortalDto jobPortalDto) {
@@ -86,7 +95,6 @@ public class JobPortalService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         AppUser appUser = appUserRepository.findByUsername(user.getUsername()).get();
-
         return appUser;
     }
 }
